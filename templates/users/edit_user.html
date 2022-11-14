@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New User Form</title>
+    <title>Update Form</title>
 </head>
 <body>
-    <h1>New User Form</h1>  
+    <h1>Update User</h1>  
     
     <form method="POST">  
-        <input type="text" name="first_name" placeholder="Update first name?">
-        <input type="text" name="last_name" placeholder="Update last name?"> 
-        <input type="text" name="image_url" placeholder="Update image?">  
-        <button action="submit">Submit User</button>
+        <input type="text" name="first_name" placeholder="Update first name?" value="{{ user.first_name}}">
+        <input type="text" name="last_name" placeholder="Update last name?" value="{{ user.last_name}}"> 
+        <input type="text" name="image_url" placeholder="Update image?" value="{{ user.image_url}}">  
+        <button action="submit">Update</button>
     </form>  
+    
+<button><a class="btn btn-sm btn-secondary" href="/users">Cancel</a></button>  
+    <!-- <button action="users">Cancel</button> -->
 
 </body>
 </html>
