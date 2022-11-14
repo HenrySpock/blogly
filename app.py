@@ -23,7 +23,11 @@ def list_users():
     users = User.query.all()
     return render_template('index.html', users=users)
 
-# @app.route("/users/new_user", methods=["POST"])
+@app.route("/users/new_user", methods=["GET"])
+def new_user_form():
+    """Display the new user form."""
+    return render_template("users/new_user.html")
+ 
 @app.route("/users/new_user", methods=["POST"]) 
 def add_user():
     """Create new user from form submission."""
@@ -34,13 +38,48 @@ def add_user():
         image_url=request.form['image_url'] or None)
 
     db.session.add(new_user)
+    db.session.commit() 
+    return redirect(f"/{new_user.id}")
+
+@app.route("/<int:user_id>")
+def show_user(user_id):
+    """Show details about a single user.""" 
+    user = User.query.get_or_404(user_id)
+    return render_template("user_details.html", user=user)
+
+# @app.route("/edit")
+# def edit_user(user_id):
+#     """Edit details about a single user."""
+#     updated_user = User(
+
+#     )
+#     user = User.query.get_or_404(user_id)
+#     return render_template("user_details.html", user=user)    
+# @app.route('/users/<int:user_id>/edit')
+# def users_edit(user_id):
+#     """Show a form to edit an existing user"""
+
+#     user = User.query.get_or_404(user_id)
+#     return render_template('users/edit.html', user=user)
+
+@app.route('/users/<int:user_id>/edit_user')
+def users_edit(user_id):
+    """Show a form to edit an existing user"""
+
+    user = User.query.get_or_404(user_id)
+    return render_template('users/edit_user.html', user=user)
+
+
+@app.route('/users/<int:user_id>/edit', methods=["POST"])
+def users_update(user_id):
+    """Handle form submission for updating an existing user"""
+
+    user = User.query.get_or_404(user_id)
+    user.first_name = request.form['first_name']
+    user.last_name = request.form['last_name']
+    user.image_url = request.form['image_url']
+
+    db.session.add(user)
     db.session.commit()
 
-    return render_template("/")
-    # return redirect(f"/{new_user.id}")
-
-# @app.route("/<int:user_id>")
-# def show_user(user_id):
-#     """Show details about a single user.""" 
-#     user = User.query.get_or_404(user_id)
-#     return render_template("user_details.html", user=user)
+    return redirect("/users")

@@ -13,6 +13,8 @@
         <li>Name: {{user.first_name}} {{user.last_name}}</li>
         <li><img src="{{user.image_url}}" height="50"></a></li>
     </ul> 
+    <button><a class="btn btn-sm btn-secondary" href="users/{{ user.id }}/edit_user">Edit User</a></button>  
+    <button><a class="btn btn-sm btn-secondary" href="">Delete User</a></button>  
     <a href="/">Go Back</a>
 </body>
 </html>
