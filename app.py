@@ -89,15 +89,15 @@ def users_update(user_id):
 
     return redirect(f"/{user.id}")
 
-@app.route('/users/<int:user_id>/delete', methods=["GET"])
-def delete(user_id):
-    """Get route for form submission for deleting an existing user"""
+# @app.route('/users/<int:user_id>/delete', methods=["GET"])
+# def delete(user_id):
+#     """Get route for form submission for deleting an existing user"""
 
-    user = User.query.get_or_404(user_id)
-    return redirect("/users")
+#     user = User.query.get_or_404(user_id)
+#     return redirect("/users/<int:user_id>/delete")
 
 @app.route('/users/<int:user_id>/delete', methods=["POST"])
-def users_destroy(user_id):
+def delete_user(user_id):
     """Handle form submission for deleting an existing user"""
 
     user = User.query.get_or_404(user_id)

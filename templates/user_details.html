@@ -12,9 +12,20 @@
         <li>ID: {{user.id}}</li>
         <li>Name: {{user.first_name}} {{user.last_name}}</li>
         <li><img src="{{user.image_url}}" height="50"></a></li>
-    </ul> 
-    <button><a class="btn btn-sm btn-secondary" href="users/{{ user.id }}/edit_user">Edit User</a></button>  
-    <button><a class="btn btn-sm btn-secondary" href="/users/{{ user.id }}/delete">Delete User</a></button>  
+    </ul>   
+    <form>
+        <button class="btn btn-primary btn-sm"
+                formaction="/users/{{ user.id }}/edit_user"
+                formmethod="GET">Edit
+        </button> 
+        <button class="btn btn-danger btn-sm"
+                formaction="/users/{{ user.id }}/delete"
+                formmethod="POST">Delete
+        </button>
+      </form>
     <button><a class="btn btn-sm btn-secondary" href="/">Go Back</a></button>  
+
+
+    
 </body>
 </html>
